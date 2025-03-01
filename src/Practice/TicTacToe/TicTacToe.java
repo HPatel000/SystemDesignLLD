@@ -1,4 +1,4 @@
-package TicTacToe;
+package Practice.TicTacToe;
 
 import java.util.*;
 
@@ -31,18 +31,20 @@ class Game {
             Player currPlayer = playerQueue.poll();
             if(currPlayer == null) continue;
             System.out.println(currPlayer.getPiece().getPieceType()+"'S Turn, Enter row and col: ");
-            int row = scanner.nextInt();
-            int col = scanner.nextInt();
-            if(board.addPiece(currPlayer.getPiece(), row, col)) {
-                board.printBoard();
-                if (board.checkWin(currPlayer.getPiece(), row, col)) {
-                    System.out.println("Congratulations!! "+currPlayer.getName()+" WON THE GAME");
-                    isNotFinished = false;
-                }
-                if(board.checkTie()) {
-                    System.out.println("It's a draw!");
-                    isNotFinished = false;
-                }
+            int row;
+            int col;
+            do {
+                row = scanner.nextInt();
+                col = scanner.nextInt();
+            } while (!board.addPiece(currPlayer.getPiece(), row, col));
+            board.printBoard();
+            if (board.checkWin(currPlayer.getPiece(), row, col)) {
+                System.out.println("Congratulations!! "+currPlayer.getName()+" WON THE GAME");
+                isNotFinished = false;
+            }
+            if(board.checkTie()) {
+                System.out.println("It's a draw!");
+                isNotFinished = false;
             }
             playerQueue.add(currPlayer);
         }
